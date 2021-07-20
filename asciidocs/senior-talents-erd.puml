@@ -1,0 +1,77 @@
+@startuml
+
+class User {
+    * userId: Long
+    roleName: Enum
+    + roleId: Long
+    email: String
+    password: String
+}
+class ContactPerson {
+    * id: Long
+    email: String
+    telNo: String
+    title: Enum
+    firstName: String
+    lastName: String
+}
+class JobOffer {
+    * jobOfferId: Long
+    title: String
+    descr: String
+    category: String
+    condition: String
+    + offerDetailsId: OfferDetails
+}
+class OfferDetails {
+    * offerDetailsId: Long
+    salary: Double
+    + addressId: Address
+}
+class Company {
+    * companyId: Long
+    companyName: String
+    websiteUrl: String
+    branche: String
+    + jobOfferId: JobOffer
+    + contactPersonId: ContactPerson
+    + addressId: Address
+}
+class Address {
+    * addressId: Long
+    street: String
+    streetNo: String
+    zipNo: Int
+    city: String
+    country: String
+    state: String
+}
+class Senior {
+    * seniorId: Long
+    resume: File
+    descr: String
+    skillDescr: String
+    interestDescr: String
+    jobField: String
+    jobBranche: String
+    preferableWork: String
+    retirement: Date
+    hoursPerWeek: Int
+    commute: boolean
+    + addressId: Address
+}
+class Admin {
+    * adminId: Long
+}
+
+User "*" -- "1" Company
+User "*" -- "1" Senior
+User "1" -- "1" Admin
+JobOffer "1" -- "1" OfferDetails
+Company "1" -- "*" JobOffer
+Company "1" -- "1" ContactPerson
+Senior "*" -- "1" Address
+Company "*" -- "1" Address
+OfferDetails "1" -left-- "1" Address
+
+@enduml
