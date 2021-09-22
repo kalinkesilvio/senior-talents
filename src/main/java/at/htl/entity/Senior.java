@@ -1,10 +1,14 @@
 package at.htl.entity;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
 
+@Entity
 public class Senior {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long seniorId;
 
     private String email;
@@ -19,6 +23,10 @@ public class Senior {
     private Date retirement;
     private int hoursPerWeek;
     private boolean commute;
+
+    @JoinColumn
+    @ManyToOne
+    private Address address;
 
     public Senior() {}
 
