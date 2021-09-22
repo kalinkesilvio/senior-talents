@@ -15,8 +15,8 @@ public class SeniorResource {
     private LinkedList<Senior> seniors = new LinkedList<>();
 
     public SeniorResource() {
-        seniors.add(new Senior("bertl.broame@gmail.com", "bertl123"));
-        seniors.add(new Senior("gustav.jauk@aon.com", "ungustl321"));
+        //seniors.add(new Senior("bertl.broame@gmail.com", "bertl123"));
+        //seniors.add(new Senior("gustav.jauk@aon.com", "ungustl321"));
     }
 
     @GET
