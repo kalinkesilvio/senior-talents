@@ -24,8 +24,24 @@ public class SeniorResource {
     }
 
     @GET
+    @Transactional
+    public Response getSeniorByEmailPassword(
+            @QueryParam("email") String email,
+            @QueryParam("password") String password) {
+        seniorRepository.save(new Senior("bertl", "UwU")); // Just for test purposes
+        return Response.ok(seniorRepository.getSeniorWithEmailPassword(email, password)).build();
+
+    }
+
+    @GET
     @Path("all")
     public Response getAll() {
         return Response.ok(seniorRepository.listAll()).build();
+    }
+
+    @GET
+    @Path("{id}")
+    public Response getById(@PathParam("id") Long id) {
+        return Response.ok(seniorRepository.getSeniorById(id)).build();
     }
 }
