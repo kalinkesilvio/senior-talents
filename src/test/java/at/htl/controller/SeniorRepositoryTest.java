@@ -10,11 +10,9 @@ import javax.transaction.Transactional;
 
 import static org.assertj.db.api.Assertions.assertThat;
 
-
-@QuarkusTest
 class SeniorRepositoryTest {
 
-    public static Source source = new Source("jdbc:postgresql://localhost:5432/db", "app", "app");
+    public static Source source = new Source("jdbc:postgresql://localhost:5433/db", "app", "app");
 
     @Test
     @Transactional
@@ -22,14 +20,13 @@ class SeniorRepositoryTest {
 
         Table table = new Table(source, "senior");
         SeniorRepository seniorRepository = new SeniorRepository();
-        Senior senior1 = new Senior();
-
-        senior1.setEmail("gustav.herzog@aon.at");
-        senior1.setPassword("roboter123");
+        Senior senior1 = new Senior("gustav.herzog@aon.at","asdf12");
+        Senior senior2 = new Senior("jörg.kompost@gmail.com", "nagel");
 
         assertThat(table).exists().hasNumberOfRows(0);
 
         seniorRepository.saveSenior(senior1);
+        seniorRepository.saveSenior(senior2);
 
         table = new Table(source, "senior");
 
@@ -39,7 +36,5 @@ class SeniorRepositoryTest {
                 .column(4)
                 .value()
                 .isEqualTo("gustav.herzog@aon.at");
-
     }
-
 }

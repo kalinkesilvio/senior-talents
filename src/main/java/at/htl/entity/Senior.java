@@ -4,7 +4,10 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.persistence.*;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 
 @Entity
@@ -12,7 +15,7 @@ public class Senior extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long seniorId;
+    private Long seniorId;
 
     private String email;
     private String password;
@@ -38,7 +41,7 @@ public class Senior extends PanacheEntityBase {
         this.password = password;
     }
 
-    public Senior(long seniorId, String email, String password, File resume, String descr, String skillDescr, String interestDescr, String jobField, String jobBranche, String preferableWork, Date retirement, int hoursPerWeek, boolean commute) {
+    public Senior(Long seniorId, String email, String password, File resume, String descr, String skillDescr, String interestDescr, String jobField, String jobBranche, String preferableWork, Date retirement, int hoursPerWeek, boolean commute) {
         this.seniorId = seniorId;
         this.email = email;
         this.password = password;
@@ -83,7 +86,28 @@ public class Senior extends PanacheEntityBase {
     }
 
     public void setResume(File resume) {
-        this.resume = resume;
+        /*byte[] pdfData = new byte[(int) resume.length()];
+
+        try {
+            DataInputStream dis = new DataInputStream(new FileInputStream(resume));
+            dis.readFully(pdfData);  // read from file into byte[] array
+            dis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String myConnectionString =
+                "jdbc:mysql://localhost:3307/mydb";
+        dbConnection = DriverManager.getConnection(myConnectionString, "root", "whatever");
+        PreparedStatement ps = dbConnection.prepareStatement(
+                "INSERT INTO project (" +
+                        "filename, " +
+                        "pdf_file " +
+                        ") VALUES (?,?)");
+        ps.setString(1, "testpdf");
+        ps.setBytes(2, pdfData);  // byte[] array
+        ps.executeUpdate();
+        this.resume = resume;*/
     }
 
     public String getDescr() {
@@ -168,6 +192,26 @@ public class Senior extends PanacheEntityBase {
 
     @Override
     public String toString() {
+        return "Senior{" +
+                "seniorId=" + seniorId +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", resume=" + resume +
+                ", descr='" + descr + '\'' +
+                ", skillDescr='" + skillDescr + '\'' +
+                ", interestDescr='" + interestDescr + '\'' +
+                ", jobField='" + jobField + '\'' +
+                ", jobBranche='" + jobBranche + '\'' +
+                ", preferableWork='" + preferableWork + '\'' +
+                ", retirement=" + retirement +
+                ", hoursPerWeek=" + hoursPerWeek +
+                ", commute=" + commute +
+                ", address=" + address +
+                '}';
+    }
+
+    /*@Override
+    public String toString() {
         String seniorBuilder = "{ ";
 
         seniorBuilder += "seniorId: " + seniorId;
@@ -199,5 +243,5 @@ public class Senior extends PanacheEntityBase {
         seniorBuilder += ", " + commute + " }";
 
         return seniorBuilder;
-    }
+    }*/
 }

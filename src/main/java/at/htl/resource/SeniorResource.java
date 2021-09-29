@@ -1,5 +1,6 @@
 package at.htl.resource;
 
+import at.htl.controller.SeniorRepository;
 import at.htl.entity.Senior;
 
 import javax.ws.rs.DELETE;
@@ -13,6 +14,7 @@ import java.util.LinkedList;
 @Path("/seniors")
 public class SeniorResource {
     private LinkedList<Senior> seniors = new LinkedList<>();
+    SeniorRepository seniorRepository = new SeniorRepository();
 
     public SeniorResource() {
         //seniors.add(new Senior("bertl.broame@gmail.com", "bertl123"));
@@ -27,6 +29,7 @@ public class SeniorResource {
     @POST
     public LinkedList<Senior> addSenior(Senior newSenior) {
         seniors.add(newSenior);
+        seniorRepository.saveSenior(newSenior);
         return seniors;
     }
 
