@@ -1,12 +1,5 @@
 @startuml
 
-class User {
-    * userId: Long
-    roleName: Enum
-    + roleId: Long
-    email: String
-    password: String
-}
 class ContactPerson {
     * id: Long
     email: String
@@ -21,15 +14,12 @@ class JobOffer {
     descr: String
     category: String
     condition: String
-    + offerDetailsId: OfferDetails
-}
-class OfferDetails {
-    * offerDetailsId: Long
     salary: Double
-    + addressId: Address
 }
 class Company {
     * companyId: Long
+    email: String
+    password: String
     companyName: String
     websiteUrl: String
     branche: String
@@ -48,6 +38,8 @@ class Address {
 }
 class Senior {
     * seniorId: Long
+    email: String
+    password: String
     resume: File
     descr: String
     skillDescr: String
@@ -60,18 +52,10 @@ class Senior {
     commute: boolean
     + addressId: Address
 }
-class Admin {
-    * adminId: Long
-}
 
-User "*" -- "1" Company
-User "*" -- "1" Senior
-User "1" -- "1" Admin
-JobOffer "1" -- "1" OfferDetails
 Company "1" -- "*" JobOffer
-Company "1" -- "1" ContactPerson
+Company "1" -- "*" ContactPerson
 Senior "*" -- "1" Address
 Company "*" -- "1" Address
-OfferDetails "1" -left-- "1" Address
 
 @enduml
