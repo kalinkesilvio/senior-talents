@@ -5,6 +5,8 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class SeniorRepository implements PanacheRepository<Senior> {
@@ -17,6 +19,12 @@ public class SeniorRepository implements PanacheRepository<Senior> {
             }
             persist(senior);
         }
+    }
+
+    public List<Senior> listAll() {
+        return findAll()
+                .stream()
+                .collect(Collectors.toList());
     }
 
     public void remove(Senior senior) {
