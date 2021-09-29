@@ -10,9 +10,16 @@ import javax.transaction.Transactional;
 public class SeniorRepository implements PanacheRepository<Senior> {
 
     @Transactional
-    public void saveSenior(Senior senior) {
-        if (senior != null && !isPersistent(senior)) {
-            senior.persist();
+    public void save(Senior senior) {
+        if (senior != null) {
+            if (senior.isPersistent()) {
+                this.remove(senior);
+            }
+            persist(senior);
         }
+    }
+
+    public void remove(Senior senior) {
+        delete(senior);
     }
 }

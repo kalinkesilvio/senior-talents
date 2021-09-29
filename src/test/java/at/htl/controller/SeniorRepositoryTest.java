@@ -20,19 +20,19 @@ class SeniorRepositoryTest {
 
         Table table = new Table(source, "senior");
         SeniorRepository seniorRepository = new SeniorRepository();
-        Senior senior1 = new Senior("gustav.herzog@aon.at","asdf12");
+        Senior senior1 = new Senior("gustav.herzog@aon.at","asdf12", null, null, null, null, null, null, null, null, 0, false, null);
         Senior senior2 = new Senior("jörg.kompost@gmail.com", "nagel");
 
         assertThat(table).exists().hasNumberOfRows(0);
 
-        seniorRepository.saveSenior(senior1);
-        seniorRepository.saveSenior(senior2);
+        seniorRepository.save(senior1);
+        //seniorRepository.saveSenior(senior2);
 
         table = new Table(source, "senior");
 
-        assertThat(table).hasNumberOfRows(1);
         assertThat(table)
-                .row(1)
+                .hasNumberOfRows(1)
+                .row(0)
                 .column(4)
                 .value()
                 .isEqualTo("gustav.herzog@aon.at");

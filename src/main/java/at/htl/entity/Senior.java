@@ -31,7 +31,7 @@ public class Senior extends PanacheEntityBase {
     private boolean commute;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
 
     public Senior() {}
@@ -41,8 +41,7 @@ public class Senior extends PanacheEntityBase {
         this.password = password;
     }
 
-    public Senior(Long seniorId, String email, String password, File resume, String descr, String skillDescr, String interestDescr, String jobField, String jobBranche, String preferableWork, Date retirement, int hoursPerWeek, boolean commute) {
-        this.seniorId = seniorId;
+    public Senior(String email, String password, File resume, String descr, String skillDescr, String interestDescr, String jobField, String jobBranche, String preferableWork, Date retirement, int hoursPerWeek, boolean commute, Address address) {
         this.email = email;
         this.password = password;
         this.resume = resume;
@@ -55,6 +54,7 @@ public class Senior extends PanacheEntityBase {
         this.retirement = retirement;
         this.hoursPerWeek = hoursPerWeek;
         this.commute = commute;
+        this.address = address;
     }
 
     public long getSeniorId() {

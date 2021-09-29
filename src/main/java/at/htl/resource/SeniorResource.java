@@ -11,7 +11,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-@Path("/seniors")
 public class SeniorResource {
     private LinkedList<Senior> seniors = new LinkedList<>();
     SeniorRepository seniorRepository = new SeniorRepository();
@@ -29,7 +28,7 @@ public class SeniorResource {
     @POST
     public LinkedList<Senior> addSenior(Senior newSenior) {
         seniors.add(newSenior);
-        seniorRepository.saveSenior(newSenior);
+        seniorRepository.save(newSenior);
         return seniors;
     }
 

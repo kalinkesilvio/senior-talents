@@ -23,8 +23,7 @@ public class Address extends PanacheEntityBase {
 
     public Address() {}
 
-    public Address(Long addressId, String street, String streetNo, int zipNo, String city, String country, String state) {
-        this.addressId = addressId;
+    public Address(String street, String streetNo, int zipNo, String city, String country, String state) {
         this.street = street;
         this.streetNo = streetNo;
         this.zipNo = zipNo;
