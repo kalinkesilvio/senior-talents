@@ -1,9 +1,11 @@
 package at.htl.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 import javax.persistence.*;
 
 @Entity
-public class Company {
+public class Company extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,8 +31,13 @@ public class Company {
 
     public Company() {}
 
-    public Company(Long companyId,
-                   String email,
+    public Company(String email, String password, String companyName) {
+        this.email = email;
+        this.password = password;
+        this.companyName = companyName;
+    }
+
+    public Company(String email,
                    String password,
                    String companyName,
                    String websiteUrl,
@@ -38,7 +45,6 @@ public class Company {
                    JobOffer jobOffer,
                    ContactPerson contactPerson,
                    Address address) {
-        this.companyId = companyId;
         this.email = email;
         this.password = password;
         this.companyName = companyName;

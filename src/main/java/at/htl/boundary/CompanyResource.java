@@ -1,17 +1,25 @@
 package at.htl.boundary;
 
 import at.htl.controller.CompanyRepository;
+import at.htl.entity.Company;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 
 @Path("company")
 public class CompanyResource {
 
     public CompanyRepository companyRepository = new CompanyRepository();
+
+    @POST
+    @Path("create")
+    @Transactional
+    public Response create(Company company) {
+        companyRepository.save(company);
+        return Response.created(URI.create("company/" + company.getCompanyId())).build();
+    }
 
     @GET
     @Path("getByEmailPassword")
