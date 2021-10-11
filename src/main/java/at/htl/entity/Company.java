@@ -19,10 +19,6 @@ public class Company extends PanacheEntityBase {
 
     @JoinColumn
     @ManyToOne(cascade = CascadeType.ALL)
-    private JobOffer jobOffer;
-
-    @JoinColumn
-    @ManyToOne(cascade = CascadeType.ALL)
     private ContactPerson contactPerson;
 
     @JoinColumn
@@ -42,7 +38,6 @@ public class Company extends PanacheEntityBase {
                    String companyName,
                    String websiteUrl,
                    String branche,
-                   JobOffer jobOffer,
                    ContactPerson contactPerson,
                    Address address) {
         this.email = email;
@@ -50,7 +45,6 @@ public class Company extends PanacheEntityBase {
         this.companyName = companyName;
         this.websiteUrl = websiteUrl;
         this.branche = branche;
-        this.jobOffer = jobOffer;
         this.contactPerson = contactPerson;
         this.address = address;
     }
@@ -103,14 +97,6 @@ public class Company extends PanacheEntityBase {
         this.branche = branche;
     }
 
-    public JobOffer getJobOffer() {
-        return jobOffer;
-    }
-
-    public void setJobOffer(JobOffer jobOffer) {
-        this.jobOffer = jobOffer;
-    }
-
     public ContactPerson getContactPerson() {
         return contactPerson;
     }
@@ -136,7 +122,6 @@ public class Company extends PanacheEntityBase {
                 ", companyName='" + companyName + '\'' +
                 ", websiteUrl='" + websiteUrl + '\'' +
                 ", branche='" + branche + '\'' +
-                ", jobOffer=" + jobOffer +
                 ", contactPerson=" + contactPerson +
                 ", address=" + address +
                 '}';

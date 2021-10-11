@@ -1,11 +1,10 @@
 package at.htl.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class JobOffer extends PanacheEntityBase {
@@ -20,15 +19,22 @@ public class JobOffer extends PanacheEntityBase {
     private String condition;
     private Double salary;
 
+    /*@JoinColumn
+    @Cascade(CascadeType.ALL)
+    @ManyToOne
+    private Company company;*/
+
+    private Long companyId;
+
     public JobOffer() {}
 
-    public JobOffer(Long jobOfferId, String title, String descr, String category, String condition, Double salary) {
-        this.jobOfferId = jobOfferId;
+    public JobOffer(String title, String descr, String category, String condition, Double salary, Long companyId) {
         this.title = title;
         this.descr = descr;
         this.category = category;
         this.condition = condition;
         this.salary = salary;
+        this.companyId = companyId;
     }
 
     public Long getJobOfferId() {
@@ -77,6 +83,14 @@ public class JobOffer extends PanacheEntityBase {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     @Override
