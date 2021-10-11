@@ -16,8 +16,17 @@ public class SeniorResource {
 
     final SeniorRepository seniorRepository = new SeniorRepository();
 
+    // TODO:
+    //saveSenior(firstName,Lastname,pwd,email)
+    //getCompanyById(email,pwd)
+    //saveCompany(Name, email,pwd)
+    //getAllJobOffersOfCompanyById(id)
+    //addJobOffer(title,description,category,condition,salary)
+    //saveAddress(street, streetno,zip,city,country,state)
+
     @POST
     @Transactional
+    @Path("create")
     public Response create(Senior senior) {
         seniorRepository.save(senior);
         return Response.created(URI.create("senior/" + senior.getSeniorId())).build();
@@ -25,6 +34,7 @@ public class SeniorResource {
 
     @GET
     @Transactional
+    @Path("getByEmailPassword")
     public Response getSeniorByEmailPassword(
             @QueryParam("email") String email,
             @QueryParam("password") String password) {
